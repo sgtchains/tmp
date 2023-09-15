@@ -24,6 +24,6 @@ action:
         - "{{ range(360)|random }}"
         - "{{ range(80,101)|random }}"
       brightness_pct: 100
-    target: {{ states.group.lights.attributes.{!input dl_light} | random }}
+    target: {{ states.group.lights.attributes.{!input dl_light}|random }}
 
 mode: single
