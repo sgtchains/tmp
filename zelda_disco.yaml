@@ -1,0 +1,29 @@
+blueprint:
+  name: Griselda's Disco
+  description: ''
+  domain: automation
+  input:
+    dl_light:
+      name: Disco Loop Light
+      description: 'Choose Light entity to Disco Loop'
+      selector:
+        target:
+          entity:
+            domain: light
+
+trigger:
+  - platform: time_pattern
+    hours: '*'
+    minutes: '*'
+    seconds: '/1'
+
+action:
+  - service: light.turn_on
+    data_template:
+      hs_color:
+        - "{{ range(360)|random }}"
+        - "{{ range(80,101)|random }}"
+      brightness_pct: 100
+    target: {{ states.group.lights.attributes.{!input dl_light} | random }}
+
+mode: single
